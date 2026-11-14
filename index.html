@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Are You Doing? - Interactive English for Kids</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Kid-Friendly Rounded Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Typography Setup */
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #e0f2fe 0%, #fdf2f8 50%, #dbeafe 100%);
+      min-height: 100vh;
+      color: #1e293b;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    /* Custom Animations */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.85); opacity: 0; }
+      70% { transform: scale(1.04); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-4deg); }
+      75% { transform: rotate(4deg); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.45); }
+      50% { box-shadow: 0 0 0 12px rgba(236, 72, 153, 0); }
+    }
+
+    .animate-float {
+      animation: floatSlow 3.2s ease-in-out infinite;
+    }
+
+    .animate-pop {
+      animation: popIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .animate-wiggle:hover {
+      animation: wiggle 0.4s ease-in-out;
+    }
+
+    .speaking-ring {
+      animation: pulseGlow 1.2s infinite;
+    }
+
+    /* Tactile 3D-style Kid Buttons */
+    .btn-candy-blue {
+      background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+      box-shadow: 0 5px 0 #0369a1, 0 8px 15px rgba(2, 132, 199, 0.25);
+      transition: all 0.12s ease;
+    }
+    .btn-candy-blue:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #0369a1;
+    }
+
+    .btn-candy-pink {
+      background: linear-gradient(180deg, #f472b6 0%, #db2777 100%);
+      box-shadow: 0 5px 0 #9d174d, 0 8px 15px rgba(219, 39, 119, 0.25);
+      transition: all 0.12s ease;
+    }
+    .btn-candy-pink:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #9d174d;
+    }
+
+    .btn-candy-mix {
+      background: linear-gradient(90deg, #0ea5e9 0%, #ec4899 100%);
+      box-shadow: 0 5px 0 #831843, 0 8px 16px rgba(236, 72, 153, 0.25);
+      transition: all 0.12s ease;
+    }
+    .btn-candy-mix:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #831843;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0f9ff;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #7dd3fc, #f9a8d4);
+      border-radius: 9999px;
+    }
+
+    /* Hide scrollbar for horizontal nav on mobile */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="selection:bg-pink-200 selection:text-pink-900">
+
+  <!-- Decorative Background Bubbles -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10" aria-hidden="true">
+    <div class="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-sky-200/50 blur-2xl"></div>
+    <div class="absolute top-1/3 -right-20 w-72 h-72 rounded-full bg-pink-200/50 blur-2xl"></div>
+    <div class="absolute -bottom-20 left-1/4 w-80 h-80 rounded-full bg-blue-200/40 blur-2xl"></div>
+  </div>
+
+  <!-- Top Header & Teacher Welcome Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b-4 border-pink-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Teacher Avatar -->
+      <div class="flex items-center gap-3">
+        <!-- Custom Cute Teacher SVG Badge -->
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-pink-400 p-1 shadow-md flex-shrink-0 animate-float">
+          <div class="w-full h-full bg-white rounded-xl flex items-center justify-center">
+            <svg viewBox="0 0 64 64" class="w-10 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Hair -->
+              <circle cx="32" cy="28" r="18" fill="#1E293B"/>
+              <!-- Face -->
+              <circle cx="32" cy="31" r="14" fill="#FDE68A"/>
+              <!-- Blush -->
+              <ellipse cx="23" cy="34" rx="2.5" ry="1.5" fill="#F472B6" opacity="0.7"/>
+              <ellipse cx="41" cy="34" rx="2.5" ry="1.5" fill="#F472B6" opacity="0.7"/>
+              <!-- Eyes -->
+              <circle cx="27" cy="29" r="2" fill="#0F172A"/>
+              <circle cx="37" cy="29" r="2" fill="#0F172A"/>
+              <!-- Glasses -->
+              <circle cx="27" cy="29" r="4.5" stroke="#0284C7" stroke-width="1.8"/>
+              <circle cx="37" cy="29" r="4.5" stroke="#0284C7" stroke-width="1.8"/>
+              <line x1="31.5" y1="29" x2="32.5" y2="29" stroke="#0284C7" stroke-width="1.8"/>
+              <!-- Smile -->
+              <path d="M28 36C29.5 38 34.5 38 36 36" stroke="#DB2777" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Shirt -->
+              <path d="M16 56C16 48 23 44 32 44C41 44 48 48 48 56" fill="#EC4899"/>
+              <path d="M27 44L32 50L37 44" fill="#38BDF8"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <span class="inline-block text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-700 border border-sky-200">
+            English Class • Ages 7–9
+          </span>
+          <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-sky-600 via-blue-600 to-pink-600 bg-clip-text text-transparent leading-tight">
+            What Are You Doing?
+          </h1>
+        </div>
+      </div>
+
+      <!-- Right Controls: Star Score & Sound Toggle -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Student Star Counter -->
+        <div class="flex items-center gap-1.5 bg-gradient-to-r from-sky-50 to-pink-50 border-2 border-pink-300 px-3.5 py-1.5 rounded-2xl shadow-sm">
+          <span class="text-xl" role="img" aria-label="star">⭐</span>
+          <span class="text-sm sm:text-base font-extrabold text-pink-700">
+            <span id="total-stars">0</span> Stars
+          </span>
+        </div>
+
+        <!-- Audio / Voice Toggle -->
+        <button id="sound-toggle-btn" onclick="toggleSound()" 
+          class="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-sky-100 hover:bg-sky-200 text-sky-800 border-2 border-sky-300 font-bold text-sm transition cursor-pointer"
+          title="Turn Voice & Sound On or Off">
+          <span id="sound-icon" class="text-lg">🔊</span>
+          <span id="sound-label" class="hidden sm:inline">Sound On</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 5 Required Menu Tabs -->
+    <nav class="max-w-6xl mx-auto px-3 sm:px-6 pb-3 pt-1 overflow-x-auto no-scrollbar" aria-label="Course Sections">
+      <div class="flex items-center justify-start sm:justify-center gap-2 min-w-max">
+        <button onclick="switchTab('materials')" id="tab-materials"
+          class="nav-tab flex items-center gap-2 px-4 py-2.5 rounded-2xl font-display font-semibold text-base transition-all cursor-pointer">
+          <span>📚</span> <span>1. Materials</span>
+        </button>
+        <button onclick="switchTab('practice')" id="tab-practice"
+          class="nav-tab flex items-center gap-2 px-4 py-2.5 rounded-2xl font-display font-semibold text-base transition-all cursor-pointer">
+          <span>✏️</span> <span>2. Practice</span>
+        </button>
+        <button onclick="switchTab('assessment')" id="tab-assessment"
+          class="nav-tab flex items-center gap-2 px-4 py-2.5 rounded-2xl font-display font-semibold text-base transition-all cursor-pointer">
+          <span>🏆</span> <span>3. Assessment</span>
+        </button>
+        <button onclick="switchTab('game')" id="tab-game"
+          class="nav-tab flex items-center gap-2 px-4 py-2.5 rounded-2xl font-display font-semibold text-base transition-all cursor-pointer">
+          <span>🎮</span> <span>4. Mini Game</span>
+        </button>
+        <button onclick="switchTab('reflection')" id="tab-reflection"
+          class="nav-tab flex items-center gap-2 px-4 py-2.5 rounded-2xl font-display font-semibold text-base transition-all cursor-pointer">
+          <span>🌟</span> <span>5. Reflection</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Friendly Toast Notification Banner (Replaces alert) -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-white border-4 border-pink-400 rounded-3xl p-4 shadow-xl animate-pop">
+    <div class="flex items-center gap-3">
+      <div id="toast-emoji" class="text-3xl">🎉</div>
+      <div>
+        <h4 id="toast-title" class="font-display font-bold text-sky-700 text-lg leading-tight">Great Job!</h4>
+        <p id="toast-message" class="text-sm font-bold text-slate-600">You earned a star!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-6xl mx-auto px-3 sm:px-6 py-6 sm:py-8">
+
+    <!-- ========================================================= -->
+    <!-- SECTION 1: MATERIALS (LESSON & VOCABULARY)                -->
+    <!-- ========================================================= -->
+    <section id="section-materials" class="space-y-8 animate-pop">
+      
+      <!-- Teacher Welcome Banner -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-sky-300 shadow-lg relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-pink-100 rounded-bl-full -z-0 opacity-70"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-center gap-5">
+          <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-pink-400 to-sky-400 flex items-center justify-center text-4xl shadow-md flex-shrink-0">
+            👩‍🏫
+          </div>
+          <div class="flex-1 text-center md:text-left">
+            <h2 class="text-2xl sm:text-3xl font-bold text-sky-700 mb-2">
+              Hello, Young Explorers! Welcome to Class!
+            </h2>
+            <p class="text-base sm:text-lg text-slate-700 leading-relaxed font-semibold">
+              Today we are learning how to talk about actions happening <span class="text-pink-600 font-extrabold underline decoration-sky-400 decoration-4">right now</span>! 
+              When someone asks, <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded-lg font-bold">"What are you doing?"</span>, we add <span class="bg-pink-100 text-pink-700 px-2 py-0.5 rounded-lg font-extrabold">-ing</span> to the action word!
+            </p>
+          </div>
+          <button onclick="speakText('Hello young explorers! Welcome to class! Today we are learning how to answer: What are you doing?')"
+            class="btn-candy-pink text-white font-display font-bold px-5 py-3 rounded-2xl flex items-center gap-2 text-base flex-shrink-0 cursor-pointer">
+            <span>🔊</span> Listen to Teacher
+          </button>
+        </div>
+
+        <!-- Example Dialogue Bubbles -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-sky-50 border-2 border-sky-300 rounded-2xl p-4 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">👦</span>
+              <div>
+                <span class="text-xs font-extrabold uppercase text-sky-600">Question</span>
+                <p class="text-lg sm:text-xl font-bold text-slate-800">"What are you doing?"</p>
+              </div>
+            </div>
+            <button onclick="speakText('What are you doing?')" class="p-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white shadow cursor-pointer" title="Listen">
+              🔊
+            </button>
+          </div>
+
+          <div class="bg-pink-50 border-2 border-pink-300 rounded-2xl p-4 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">👧</span>
+              <div>
+                <span class="text-xs font-extrabold uppercase text-pink-600">Answer</span>
+                <p class="text-lg sm:text-xl font-bold text-slate-800">"I am <span class="text-pink-600">reading</span> a book!"</p>
+              </div>
+            </div>
+            <button onclick="speakText('I am reading a book!')" class="p-3 rounded-xl bg-pink-500 hover:bg-pink-600 text-white shadow cursor-pointer" title="Listen">
+              🔊
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Action Words Vocabulary Grid -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-pink-300 shadow-lg">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+          <div>
+            <span class="px-3 py-1 rounded-full bg-pink-100 text-pink-700 font-extrabold text-xs uppercase">Step 1 • Vocabulary</span>
+            <h3 class="text-2xl font-bold text-slate-800 mt-1">10 Fun Action Words (Tap to Listen!)</h3>
+          </div>
+          <p class="text-sm font-bold text-sky-700 bg-sky-50 px-3 py-1.5 rounded-xl border border-sky-200">
+            💡 Tip: Tap any card to hear the word and sentence!
+          </p>
+        </div>
+
+        <!-- Vocabulary Cards Container (Populated by JS) -->
+        <div id="vocab-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+          <!-- Cards rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Step 2: Kid-Friendly Grammar Helper & Interactive Sentence Machine -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-sky-300 shadow-lg">
+        <span class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 font-extrabold text-xs uppercase">Step 2 • Grammar Magic</span>
+        <h3 class="text-2xl font-bold text-slate-800 mt-1 mb-4">How to Build a Sentence</h3>
+
+        <!-- 3 Color-Coded Grammar Rule Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="rounded-2xl p-4 bg-sky-50 border-2 border-sky-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-display font-bold text-xl text-sky-700">I + am</span>
+              <button onclick="speakText('I am singing.')" class="text-sm bg-sky-200 hover:bg-sky-300 text-sky-900 font-bold px-2.5 py-1 rounded-lg cursor-pointer">🔊 Hear</button>
+            </div>
+            <p class="text-slate-700 font-semibold text-base">Use <strong class="text-sky-700">am</strong> only with <strong class="text-sky-700">I</strong>.</p>
+            <p class="mt-2 bg-white px-3 py-2 rounded-xl text-sm font-bold text-slate-800 border border-sky-200">
+              "I <span class="text-pink-600">am singing</span>." 🎤
+            </p>
+          </div>
+
+          <div class="rounded-2xl p-4 bg-pink-50 border-2 border-pink-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-display font-bold text-xl text-pink-700">He / She + is</span>
+              <button onclick="speakText('She is drawing. He is running.')" class="text-sm bg-pink-200 hover:bg-pink-300 text-pink-900 font-bold px-2.5 py-1 rounded-lg cursor-pointer">🔊 Hear</button>
+            </div>
+            <p class="text-slate-700 font-semibold text-base">Use <strong class="text-pink-700">is</strong> for 1 boy, 1 girl, or 1 animal.</p>
+            <p class="mt-2 bg-white px-3 py-2 rounded-xl text-sm font-bold text-slate-800 border border-pink-200">
+              "She <span class="text-pink-600">is drawing</span>." 🎨
+            </p>
+          </div>
+
+          <div class="rounded-2xl p-4 bg-indigo-50 border-2 border-indigo-300">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-display font-bold text-xl text-indigo-700">You / We / They + are</span>
+              <button onclick="speakText('They are jumping.')" class="text-sm bg-indigo-200 hover:bg-indigo-300 text-indigo-900 font-bold px-2.5 py-1 rounded-lg cursor-pointer">🔊 Hear</button>
+            </div>
+            <p class="text-slate-700 font-semibold text-base">Use <strong class="text-indigo-700">are</strong> for <strong class="text-indigo-700">you</strong> or 2+ people.</p>
+            <p class="mt-2 bg-white px-3 py-2 rounded-xl text-sm font-bold text-slate-800 border border-indigo-200">
+              "They <span class="text-pink-600">are jumping</span>." 🦘
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive Sentence Maker Playground -->
+        <div class="bg-gradient-to-r from-sky-100 via-purple-50 to-pink-100 rounded-3xl p-5 border-2 border-pink-300">
+          <h4 class="font-display font-bold text-xl text-center text-slate-800 mb-1">
+            🪄 Try the Magic Sentence Machine!
+          </h4>
+          <p class="text-center text-sm font-bold text-slate-600 mb-4">
+            Pick a Person and an Action to hear your sentence!
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <!-- Subject Picker -->
+            <div class="bg-white/90 rounded-2xl p-3.5 border border-sky-200">
+              <p class="text-xs font-extrabold uppercase text-sky-600 mb-2">1. Choose Who:</p>
+              <div id="builder-subjects" class="flex flex-wrap gap-2">
+                <!-- Buttons added by JS -->
+              </div>
+            </div>
+
+            <!-- Action Picker -->
+            <div class="bg-white/90 rounded-2xl p-3.5 border border-pink-200">
+              <p class="text-xs font-extrabold uppercase text-pink-600 mb-2">2. Choose Action:</p>
+              <div id="builder-actions" class="flex flex-wrap gap-2">
+                <!-- Buttons added by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Result Display -->
+          <div class="bg-white rounded-2xl p-4 border-4 border-sky-400 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-inner">
+            <div class="flex items-center gap-3 text-center sm:text-left">
+              <span id="builder-emoji" class="text-4xl">📖</span>
+              <div>
+                <p class="text-xs font-extrabold uppercase text-slate-400">Your Sentence:</p>
+                <p id="builder-output" class="text-xl sm:text-2xl font-display font-bold text-slate-800">
+                  <span class="text-sky-600">I</span> <span class="text-purple-600">am</span> <span class="text-pink-600">reading a book</span>.
+                </p>
+              </div>
+            </div>
+            <button onclick="speakBuilderSentence()" class="btn-candy-blue text-white font-display font-bold px-5 py-3 rounded-2xl flex items-center gap-2 cursor-pointer">
+              <span>🔊</span> Speak Sentence
+            </button>
+          </div>
+        </div>
+
+        <!-- Spelling Tip Accordion / Box -->
+        <div class="mt-5 bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <span class="text-3xl">🌟</span>
+          <div class="text-sm sm:text-base font-semibold text-amber-950">
+            <strong class="font-extrabold">Teacher's Spelling Secret:</strong> 
+            Most words just add <span class="font-extrabold text-pink-600">-ing</span> (<em>read → reading</em>). 
+            If a word ends with silent <strong class="text-sky-700">-e</strong>, drop the <strong>e</strong> (<em>write → writing</em>). 
+            Short words like <em>run</em> and <em>swim</em> double the last letter (<em>running, swimming</em>)!
+          </div>
+        </div>
+
+        <!-- Next Section Prompt -->
+        <div class="mt-6 text-center">
+          <button onclick="switchTab('practice')" class="btn-candy-mix text-white font-display font-bold text-lg px-8 py-3.5 rounded-2xl inline-flex items-center gap-2 cursor-pointer">
+            Ready to Practice? Let's Go! <span>➡️</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 2: PRACTICE (GUIDED INTERACTIVE EXERCISES)        -->
+    <!-- ========================================================= -->
+    <section id="section-practice" class="hidden space-y-8 animate-pop">
+      
+      <!-- Practice Header -->
+      <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-pink-300 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="px-3 py-1 rounded-full bg-pink-100 text-pink-700 font-extrabold text-xs uppercase">Guided Practice</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-sky-700 mt-1">Let's Practice Together!</h2>
+          <p class="text-slate-600 font-semibold">Complete all 3 fun activities to earn extra stars. Take your time!</p>
+        </div>
+        <div class="bg-sky-50 border-2 border-sky-200 rounded-2xl px-4 py-2.5 text-center">
+          <span class="text-xs font-extrabold uppercase text-sky-600 block">Practice Progress</span>
+          <span id="practice-progress-text" class="font-display font-bold text-xl text-pink-600">0 / 3 Completed</span>
+        </div>
+      </div>
+
+      <!-- Practice 1: Picture & Word Matching -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-sky-300 shadow-lg">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-800">
+            Activity 1: Look at the Emoji & Pick the Action!
+          </h3>
+          <span id="p1-badge" class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-sm">0 / 4 Solved</span>
+        </div>
+        <div id="practice-1-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Practice 2: Choose am / is / are -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-pink-300 shadow-lg">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-800">
+            Activity 2: Pick the Magic Helper (<span class="text-sky-600">am</span>, <span class="text-pink-600">is</span>, or <span class="text-indigo-600">are</span>)
+          </h3>
+          <span id="p2-badge" class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-sm">0 / 4 Solved</span>
+        </div>
+        <div id="practice-2-list" class="space-y-4">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Practice 3: Sentence Word Order Builder -->
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-sky-300 shadow-lg">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-800">
+            Activity 3: Put the Words in Order!
+          </h3>
+          <span id="p3-badge" class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-sm">Question 1 of 3</span>
+        </div>
+        <p class="text-slate-600 font-semibold mb-4">Tap the word bubbles in the right order to make a sentence.</p>
+
+        <div id="practice-3-container" class="bg-gradient-to-r from-sky-50 to-pink-50 rounded-2xl p-5 border-2 border-pink-200">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button onclick="switchTab('assessment')" class="btn-candy-mix text-white font-display font-bold text-lg px-8 py-3.5 rounded-2xl inline-flex items-center gap-2 cursor-pointer">
+          Ready for the Quiz Challenge? <span>🏆</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 3: ASSESSMENT (QUIZ & CERTIFICATE)                -->
+    <!-- ========================================================= -->
+    <section id="section-assessment" class="hidden space-y-6 animate-pop">
+      
+      <div class="bg-white rounded-3xl p-5 sm:p-8 border-4 border-sky-300 shadow-lg max-w-3xl mx-auto">
+        <!-- Quiz Start / Active View -->
+        <div id="quiz-active-view">
+          <div class="flex items-center justify-between gap-4 mb-4">
+            <div>
+              <span class="px-3 py-1 rounded-full bg-sky-100 text-sky-700 font-extrabold text-xs uppercase">English Quiz</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mt-1">Show What You Know!</h2>
+            </div>
+            <div class="text-right">
+              <span id="quiz-step-label" class="font-display font-bold text-lg text-pink-600">Question 1 / 8</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="w-full h-4 bg-slate-100 rounded-full overflow-hidden border border-slate-200 mb-6">
+            <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-sky-400 to-pink-500 transition-all duration-300" style="width: 12.5%"></div>
+          </div>
+
+          <!-- Question Card -->
+          <div id="quiz-question-box" class="space-y-5">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Quiz Result & Printable Certificate View -->
+        <div id="quiz-result-view" class="hidden text-center space-y-6 animate-pop">
+          <div class="inline-block p-4 rounded-full bg-gradient-to-br from-sky-100 to-pink-100 border-4 border-pink-300 text-5xl">
+            🏆
+          </div>
+          <h2 class="text-3xl font-bold text-sky-700">Awesome Effort, Superstar!</h2>
+          <p id="quiz-score-summary" class="text-xl font-bold text-slate-700">
+            You scored 8 out of 8!
+          </p>
+
+          <!-- Customizable Certificate Card -->
+          <div class="bg-gradient-to-br from-sky-50 via-white to-pink-50 border-8 border-double border-pink-400 rounded-3xl p-6 sm:p-8 shadow-xl max-w-xl mx-auto relative">
+            <div class="text-xs font-extrabold uppercase tracking-widest text-sky-600 mb-1">Certificate of Achievement</div>
+            <h3 class="text-2xl sm:text-3xl font-display font-bold text-pink-600 mb-3">English Action Master</h3>
+            <p class="text-slate-600 font-semibold text-sm mb-3">This proud award is presented to:</p>
+            
+            <input id="student-name-input" type="text" placeholder="Type your name here..." maxlength="28"
+              class="w-full max-w-xs text-center font-display font-bold text-xl sm:text-2xl text-sky-800 bg-white border-b-4 border-sky-400 rounded-xl px-3 py-1.5 focus:outline-none focus:border-pink-500 mb-3" />
+            
+            <p class="text-slate-700 font-bold text-base">
+              For mastering <span class="text-sky-700">"What Are You Doing?"</span> and Present Continuous action words!
+            </p>
+            <div class="mt-4 flex items-center justify-center gap-6 text-sm font-extrabold text-pink-700">
+              <span id="cert-score-badge">Score: 8/8</span>
+              <span>•</span>
+              <span>Teacher Approved 👩‍🏫⭐</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button onclick="resetQuiz()" class="btn-candy-blue text-white font-display font-bold px-6 py-3 rounded-2xl cursor-pointer">
+              🔄 Try Quiz Again
+            </button>
+            <button onclick="switchTab('game')" class="btn-candy-pink text-white font-display font-bold px-6 py-3 rounded-2xl cursor-pointer">
+              🎮 Play Mini Game!
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 4: MINI GAME ("ACTION POP CARNIVAL")              -->
+    <!-- ========================================================= -->
+    <section id="section-game" class="hidden space-y-6 animate-pop">
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-pink-300 shadow-lg max-w-4xl mx-auto">
+        
+        <!-- Game Header -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b-2 border-slate-100">
+          <div>
+            <span class="px-3 py-1 rounded-full bg-pink-100 text-pink-700 font-extrabold text-xs uppercase">Mini Game</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-sky-700 mt-1">Action Pop Carnival! 🎈</h2>
+            <p class="text-slate-600 font-semibold text-sm sm:text-base">
+              Read or listen to the sentence, then tap the matching action card as fast as you can!
+            </p>
+          </div>
+
+          <!-- Score & Timer Pills -->
+          <div class="flex items-center gap-3">
+            <div class="bg-sky-50 border-2 border-sky-300 px-4 py-2 rounded-2xl text-center">
+              <span class="text-xs font-extrabold uppercase text-sky-600 block">Score</span>
+              <span id="game-score" class="font-display font-bold text-2xl text-sky-800">0</span>
+            </div>
+            <div class="bg-pink-50 border-2 border-pink-300 px-4 py-2 rounded-2xl text-center">
+              <span class="text-xs font-extrabold uppercase text-pink-600 block">Time</span>
+              <span id="game-timer" class="font-display font-bold text-2xl text-pink-700">45s</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Start Screen -->
+        <div id="game-start-screen" class="py-10 text-center space-y-5">
+          <div class="text-6xl animate-float">🎯🎈</div>
+          <h3 class="text-2xl font-bold text-slate-800">Choose Your Speed!</h3>
+          <p class="text-slate-600 font-semibold max-w-md mx-auto">
+            Every correct tap gives you <strong class="text-pink-600">+10 points</strong>. Get 50+ points to win bonus stars!
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <button onclick="startGame(60)" class="btn-candy-blue text-white font-display font-bold text-lg px-7 py-3.5 rounded-2xl cursor-pointer">
+              🐢 Relaxed Mode (60s)
+            </button>
+            <button onclick="startGame(40)" class="btn-candy-pink text-white font-display font-bold text-lg px-7 py-3.5 rounded-2xl cursor-pointer">
+              🚀 Super Fast Mode (40s)
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Game Board -->
+        <div id="game-play-screen" class="hidden pt-5 space-y-5">
+          <!-- Target Prompt Banner -->
+          <div class="bg-gradient-to-r from-sky-500 to-pink-500 text-white rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md">
+            <div class="text-center sm:text-left">
+              <span class="text-xs font-extrabold uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full">
+                Find This Action:
+              </span>
+              <h3 id="game-target-prompt" class="text-2xl sm:text-3xl font-display font-bold mt-1">
+                "She is reading a book!"
+              </h3>
+            </div>
+            <button onclick="repeatGamePrompt()" class="bg-white text-pink-600 hover:bg-pink-50 font-display font-bold px-4 py-2.5 rounded-xl shadow flex items-center gap-2 cursor-pointer">
+              <span>🔊</span> Hear Again
+            </button>
+          </div>
+
+          <!-- 6 Action Target Cards Grid -->
+          <div id="game-cards-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="flex justify-between items-center pt-2">
+            <span id="game-streak-badge" class="text-sm font-extrabold text-pink-600">🔥 Streak: 0</span>
+            <button onclick="endGame()" class="text-sm font-bold text-slate-500 hover:text-slate-700 underline cursor-pointer">
+              Stop Game
+            </button>
+          </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="hidden py-8 text-center space-y-5 animate-pop">
+          <div class="text-6xl">🎊🌟</div>
+          <h3 class="text-3xl font-bold text-sky-700">Time's Up! Great Playing!</h3>
+          <p id="game-final-summary" class="text-xl font-bold text-slate-700">
+            Your Final Score: 80 Points!
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <button onclick="startGame(45)" class="btn-candy-mix text-white font-display font-bold text-lg px-7 py-3.5 rounded-2xl cursor-pointer">
+              🔄 Play Again
+            </button>
+            <button onclick="switchTab('reflection')" class="btn-candy-blue text-white font-display font-bold text-lg px-7 py-3.5 rounded-2xl cursor-pointer">
+              🌟 Go to Reflection
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 5: REFLECTION (SELF-CHECK & WRAP-UP)              -->
+    <!-- ========================================================= -->
+    <section id="section-reflection" class="hidden space-y-6 animate-pop">
+      <div class="bg-white rounded-3xl p-5 sm:p-8 border-4 border-sky-300 shadow-lg max-w-3xl mx-auto space-y-6">
+        
+        <div class="text-center">
+          <span class="px-3 py-1 rounded-full bg-pink-100 text-pink-700 font-extrabold text-xs uppercase">Lesson Reflection</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-sky-700 mt-1">How Did You Do Today? 🌟</h2>
+          <p class="text-slate-600 font-semibold mt-1">
+            Great learners always think about what they learned! Complete your reflection below.
+          </p>
+        </div>
+
+        <!-- Step 1: Mood / Confidence Selector -->
+        <div class="bg-sky-50 rounded-2xl p-5 border-2 border-sky-200">
+          <h3 class="font-display font-bold text-lg text-slate-800 mb-3">
+            1. How do you feel about "What Are You Doing?" now?
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <button onclick="selectMood('super')" id="mood-super"
+              class="mood-btn p-4 rounded-2xl bg-white border-2 border-sky-200 hover:border-pink-400 text-center transition cursor-pointer">
+              <div class="text-4xl mb-1">🤩</div>
+              <div class="font-bold text-slate-800">Super Easy!</div>
+              <div class="text-xs font-semibold text-slate-500">I can teach a friend!</div>
+            </button>
+            <button onclick="selectMood('good')" id="mood-good"
+              class="mood-btn p-4 rounded-2xl bg-white border-2 border-sky-200 hover:border-pink-400 text-center transition cursor-pointer">
+              <div class="text-4xl mb-1">😊</div>
+              <div class="font-bold text-slate-800">Pretty Good!</div>
+              <div class="text-xs font-semibold text-slate-500">I understand most of it.</div>
+            </button>
+            <button onclick="selectMood('practice')" id="mood-practice"
+              class="mood-btn p-4 rounded-2xl bg-white border-2 border-sky-200 hover:border-pink-400 text-center transition cursor-pointer">
+              <div class="text-4xl mb-1">🤔</div>
+              <div class="font-bold text-slate-800">Need Practice</div>
+              <div class="text-xs font-semibold text-slate-500">I want to review again!</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: "I Can" Checklist -->
+        <div class="bg-pink-50 rounded-2xl p-5 border-2 border-pink-200 space-y-3">
+          <h3 class="font-display font-bold text-lg text-slate-800">
+            2. Tap the things you can do now:
+          </h3>
+          <label class="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-pink-200 cursor-pointer hover:bg-pink-50/50">
+            <input type="checkbox" class="reflection-check w-6 h-6 accent-pink-500 rounded" />
+            <span class="font-bold text-slate-700">I can ask someone: <em>"What are you doing?"</em></span>
+          </label>
+          <label class="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-pink-200 cursor-pointer hover:bg-pink-50/50">
+            <input type="checkbox" class="reflection-check w-6 h-6 accent-pink-500 rounded" />
+            <span class="font-bold text-slate-700">I can answer using <em>"I am ...-ing"</em> (like <em>"I am reading"</em>).</span>
+          </label>
+          <label class="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-pink-200 cursor-pointer hover:bg-pink-50/50">
+            <input type="checkbox" class="reflection-check w-6 h-6 accent-pink-500 rounded" />
+            <span class="font-bold text-slate-700">I know when to use <strong>am</strong>, <strong>is</strong>, and <strong>are</strong>!</span>
+          </label>
+        </div>
+
+        <!-- Step 3: Favorite Action & Sentence -->
+        <div class="bg-gradient-to-r from-sky-50 to-pink-50 rounded-2xl p-5 border-2 border-sky-200 space-y-3">
+          <h3 class="font-display font-bold text-lg text-slate-800">
+            3. What is your favorite action word today? Write a short sentence!
+          </h3>
+          <input id="reflection-sentence" type="text" placeholder="Example: I am swimming in the pool!"
+            class="w-full px-4 py-3 rounded-xl bg-white border-2 border-sky-300 focus:border-pink-400 focus:outline-none font-bold text-slate-700" />
+        </div>
+
+        <div class="text-center">
+          <button onclick="submitReflection()" class="btn-candy-mix text-white font-display font-bold text-lg px-8 py-3.5 rounded-2xl cursor-pointer">
+            ✨ Complete My Lesson!
+          </button>
+        </div>
+
+        <!-- Teacher Feedback Card after Reflection -->
+        <div id="reflection-complete-card" class="hidden bg-gradient-to-br from-sky-100 via-white to-pink-100 border-4 border-pink-400 rounded-3xl p-6 text-center space-y-2 animate-pop">
+          <div class="text-5xl">👩‍🏫💖</div>
+          <h4 class="font-display font-bold text-2xl text-pink-600">Teacher's Sticker Earned!</h4>
+          <p id="reflection-teacher-note" class="font-bold text-slate-700 text-base">
+            You worked so hard today! Keep practicing your English every day!
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto px-4 py-6 text-center text-sm font-bold text-slate-500">
+    Interactive English Learning Media • Topic: <span class="text-sky-600">What Are You Doing?</span> • Designed for Young Learners (Ages 7–9)
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- JAVASCRIPT APPLICATION LOGIC                              -->
+  <!-- ========================================================= -->
+  <script>
+    // ==========================================
+    // 1. CORE CURRICULUM DATA
+    // ==========================================
+    const VOCABULARY = [
+      { id: 'reading', word: 'reading', base: 'read', emoji: '📖', sentence: 'I am reading a book.', subject: 'I', helper: 'am', object: 'a book' },
+      { id: 'writing', word: 'writing', base: 'write', emoji: '✏️', sentence: 'She is writing a story.', subject: 'She', helper: 'is', object: 'a story' },
+      { id: 'eating', word: 'eating', base: 'eat', emoji: '🍎', sentence: 'He is eating an apple.', subject: 'He', helper: 'is', object: 'an apple' },
+      { id: 'drinking', word: 'drinking', base: 'drink', emoji: '🥤', sentence: 'She is drinking water.', subject: 'She', helper: 'is', object: 'water' },
+      { id: 'running', word: 'running', base: 'run', emoji: '🏃', sentence: 'He is running fast.', subject: 'He', helper: 'is', object: 'fast' },
+      { id: 'jumping', word: 'jumping', base: 'jump', emoji: '🦘', sentence: 'They are jumping high.', subject: 'They', helper: 'are', object: 'high' },
+      { id: 'sleeping', word: 'sleeping', base: 'sleep', emoji: '😴', sentence: 'The cat is sleeping.', subject: 'She', helper: 'is', object: 'peacefully' },
+      { id: 'singing', word: 'singing', base: 'sing', emoji: '🎤', sentence: 'I am singing a song.', subject: 'I', helper: 'am', object: 'a song' },
+      { id: 'drawing', word: 'drawing', base: 'draw', emoji: '🎨', sentence: 'She is drawing a flower.', subject: 'She', helper: 'is', object: 'a flower' },
+      { id: 'swimming', word: 'swimming', base: 'swim', emoji: '🏊', sentence: 'They are swimming in the pool.', subject: 'They', helper: 'are', object: 'in the pool' }
+    ];
+
+    const BUILDER_SUBJECTS = [
+      { label: 'I', helper: 'am' },
+      { label: 'He', helper: 'is' },
+      { label: 'She', helper: 'is' },
+      { label: 'You', helper: 'are' },
+      { label: 'They', helper: 'are' }
+    ];
+
+    const BUILDER_ACTIONS = [
+      { label: 'reading a book', emoji: '📖' },
+      { label: 'eating an apple', emoji: '🍎' },
+      { label: 'singing a song', emoji: '🎤' },
+      { label: 'drawing a picture', emoji: '🎨' },
+      { label: 'running fast', emoji: '🏃' },
+      { label: 'swimming', emoji: '🏊' }
+    ];
+
+    // Practice 1 Data: Emoji Identification
+    const PRACTICE_1_ITEMS = [
+      { id: 'p1-1', emoji: '🎨', clue: 'She has a paintbrush!', correct: 'drawing', options: ['drawing', 'sleeping', 'eating'], solved: false },
+      { id: 'p1-2', emoji: '🥤', clue: 'He is thirsty!', correct: 'drinking', options: ['running', 'drinking', 'writing'], solved: false },
+      { id: 'p1-3', emoji: '😴', clue: 'Shh! Be quiet!', correct: 'sleeping', options: ['jumping', 'singing', 'sleeping'], solved: false },
+      { id: 'p1-4', emoji: '🏊', clue: 'Splash in the water!', correct: 'swimming', options: ['swimming', 'reading', 'eating'], solved: false }
+    ];
+
+    // Practice 2 Data: am / is / are
+    const PRACTICE_2_ITEMS = [
+      { id: 'p2-1', emoji: '👦', before: 'I', after: 'eating a yummy banana.', correct: 'am', hint: 'Remember: "I" always goes with "am"!', solved: false },
+      { id: 'p2-2', emoji: '👧', before: 'She', after: 'writing her name.', correct: 'is', hint: '"She" is one girl, so we use "is"!', solved: false },
+      { id: 'p2-3', emoji: '👫', before: 'They', after: 'jumping on the trampoline.', correct: 'are', hint: '"They" means more than one person, so use "are"!', solved: false },
+      { id: 'p2-4', emoji: '🧑', before: 'He', after: 'running in the park.', correct: 'is', hint: '"He" is one boy, so we use "is"!', solved: false }
+    ];
+
+    // Practice 3 Data: Sentence Unscramble
+    const PRACTICE_3_SENTENCES = [
+      { emoji: '📖', words: ['I', 'am', 'reading', 'a book.'], full: 'I am reading a book.' },
+      { emoji: '🎤', words: ['She', 'is', 'singing', 'a song.'], full: 'She is singing a song.' },
+      { emoji: '🏊', words: ['They', 'are', 'swimming', 'now.'], full: 'They are swimming now.' }
+    ];
+
+    // Assessment Quiz Data (8 Questions)
+    const QUIZ_QUESTIONS = [
+      {
+        type: 'picture',
+        emoji: '📖',
+        question: 'Look at the picture. What is he doing?',
+        speak: 'Look at the picture. What is he doing?',
+        options: ['He is reading a book.', 'He is sleeping.', 'He is swimming.'],
+        correct: 0
+      },
+      {
+        type: 'grammar',
+        emoji: '👧',
+        question: 'Complete the sentence: "She ___ drawing a cat."',
+        speak: 'Complete the sentence: She blank drawing a cat.',
+        options: ['am', 'is', 'are'],
+        correct: 1
+      },
+      {
+        type: 'listening',
+        emoji: '🎧',
+        question: 'Tap the speaker button, listen, and choose the right action!',
+        speak: 'They are jumping high!',
+        options: ['They are eating.', 'They are jumping high!', 'They are writing.'],
+        correct: 1
+      },
+      {
+        type: 'grammar',
+        emoji: '🙋',
+        question: 'Someone asks: "What are you doing?" How do you answer?',
+        speak: 'Someone asks: What are you doing? How do you answer?',
+        options: ['I are singing.', 'I is singing.', 'I am singing.'],
+        correct: 2
+      },
+      {
+        type: 'picture',
+        emoji: '🍎',
+        question: 'Look! What is she doing?',
+        speak: 'Look! What is she doing?',
+        options: ['She is eating an apple.', 'She is drinking milk.', 'She is running fast.'],
+        correct: 0
+      },
+      {
+        type: 'grammar',
+        emoji: '👫',
+        question: 'Complete the sentence: "We ___ learning English!"',
+        speak: 'Complete the sentence: We blank learning English!',
+        options: ['am', 'is', 'are'],
+        correct: 2
+      },
+      {
+        type: 'spelling',
+        emoji: '✏️',
+        question: 'Which word is spelled right for "write + ing"?',
+        speak: 'Which word is spelled right for write plus ing?',
+        options: ['writeing', 'writing', 'writting'],
+        correct: 1
+      },
+      {
+        type: 'listening',
+        emoji: '🎧',
+        question: 'Listen carefully! What is he doing?',
+        speak: 'He is drinking water.',
+        options: ['He is drinking water.', 'He is sleeping.', 'He is drawing.'],
+        correct: 0
+      }
+    ];
+
+    // ==========================================
+    // 2. APPLICATION STATE
+    // ==========================================
+    let state = {
+      currentTab: 'materials',
+      stars: 0,
+      soundEnabled: true,
+      selectedSubject: BUILDER_SUBJECTS[0],
+      selectedAction: BUILDER_ACTIONS[0],
+      p3Index: 0,
+      p3SelectedWords: [],
+      p3Completed: false,
+      quizIndex: 0,
+      quizScore: 0,
+      quizAnswered: false,
+      gameScore: 0,
+      gameTimeLeft: 45,
+      gameInterval: null,
+      gameTarget: null,
+      gameStreak: 0,
+      selectedMood: null,
+      reflectionSubmitted: false
+    };
+
+    // ==========================================
+    // 3. SOUND EFFECTS & TEXT-TO-SPEECH
+    // ==========================================
+    function toggleSound() {
+      state.soundEnabled = !state.soundEnabled;
+      document.getElementById('sound-icon').textContent = state.soundEnabled ? '🔊' : '🔇';
+      document.getElementById('sound-label').textContent = state.soundEnabled ? 'Sound On' : 'Muted';
+      if (state.soundEnabled) {
+        playTone('pop');
+      } else if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function speakText(text) {
+      if (!state.soundEnabled) return;
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'en-US';
+          utterance.rate = 0.92; // Slightly slower, clear teacher pace for 7-9 year olds
+          utterance.pitch = 1.08;
+          window.speechSynthesis.speak(utterance);
+        }
+      } catch (e) {
+        // Fallback silently if speech synthesis is blocked
+      }
+    }
+
+    // Gentle Web Audio API chimes (no external audio URLs needed)
+    function playTone(type) {
+      if (!state.soundEnabled) return;
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        const now = ctx.currentTime;
+        if (type === 'correct') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc.start(now);
+          osc.stop(now + 0.45);
+        } else if (type === 'tryAgain') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(330, now);
+          osc.frequency.setValueAtTime(293.66, now + 0.15);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        }
+      } catch (e) {
+        // Ignore audio context errors
+      }
+    }
+
+    // ==========================================
+    // 4. STAR REWARDS & TOAST BANNER
+    // ==========================================
+    let toastTimeout = null;
+    function awardStars(count, title, message, emoji = '⭐') {
+      state.stars += count;
+      document.getElementById('total-stars').textContent = state.stars;
+      showToast(title, message, emoji);
+    }
+
+    function showToast(title, message, emoji = '🎉') {
+      const banner = document.getElementById('toast-banner');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-message').textContent = message;
+      document.getElementById('toast-emoji').textContent = emoji;
+
+      banner.classList.remove('hidden');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 3200);
+    }
+
+    // ==========================================
+    // 5. NAVIGATION TABS
+    // ==========================================
+    function switchTab(tabId) {
+      state.currentTab = tabId;
+      playTone('pop');
+
+      // Stop mini-game timer if leaving game tab
+      if (tabId !== 'game' && state.gameInterval) {
+        clearInterval(state.gameInterval);
+        state.gameInterval = null;
+      }
+
+      const sections = ['materials', 'practice', 'assessment', 'game', 'reflection'];
+      sections.forEach(sec => {
+        const el = document.getElementById(`section-${sec}`);
+        const btn = document.getElementById(`tab-${sec}`);
+        if (sec === tabId) {
+          el.classList.remove('hidden');
+          btn.className = 'nav-tab flex items-center gap-2 px-4 py-2.5 rounded-2xl font-display font-bold text-base bg-gradient-to-r from-sky-500 to-pink-500 text-white shadow-md scale-105 transition-all cursor-pointer';
+        } else {
+          el.classList.add('hidden');
+          btn.className = 'nav-tab flex items-center gap-2 px-4 py-2.5 rounded-2xl font-display font-semibold text-base bg-sky-50 hover:bg-pink-50 text-slate-700 border-2 border-sky-200 transition-all cursor-pointer';
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // 6. SECTION 1: MATERIALS RENDERING
+    // ==========================================
+    function renderMaterials() {
+      // Render Vocabulary Grid
+      const grid = document.getElementById('vocab-grid');
+      grid.innerHTML = VOCABULARY.map((item, idx) => {
+        const isPink = idx % 2 === 1;
+        const borderClass = isPink ? 'border-pink-300 hover:border-pink-500 bg-pink-50/40' : 'border-sky-300 hover:border-sky-500 bg-sky-50/40';
+        const badgeClass = isPink ? 'bg-pink-500 text-white' : 'bg-sky-500 text-white';
+
+        return `
+          <button onclick="playVocabCard('${item.id}')" 
+            class="group rounded-3xl p-4 border-3 border-2 ${borderClass} shadow-sm hover:shadow-md hover:-translate-y-1 transition-all text-center flex flex-col items-center justify-between cursor-pointer">
+            <div class="w-16 h-16 rounded-2xl bg-white shadow-inner flex items-center justify-center text-4xl mb-2 group-hover:scale-110 transition-transform">
+              ${item.emoji}
+            </div>
+            <div class="font-display font-bold text-lg sm:text-xl text-slate-800 capitalize">
+              ${item.word}
+            </div>
+            <div class="text-xs font-bold text-slate-500 mt-0.5 mb-2">
+              (${item.base} + ing)
+            </div>
+            <span class="inline-flex items-center gap-1 text-xs font-extrabold px-3 py-1 rounded-full ${badgeClass}">
+              🔊 Listen
+            </span>
+          </button>
+        `;
+      }).join('');
+
+      // Render Sentence Builder Buttons
+      const subjContainer = document.getElementById('builder-subjects');
+      subjContainer.innerHTML = BUILDER_SUBJECTS.map((s, i) => `
+        <button onclick="selectBuilderSubject(${i})" id="subj-btn-${i}"
+          class="px-3.5 py-2 rounded-xl font-display font-bold text-base border-2 transition cursor-pointer ${i === 0 ? 'bg-sky-500 text-white border-sky-600 shadow' : 'bg-sky-50 text-sky-800 border-sky-200 hover:bg-sky-100'}">
+          ${s.label}
+        </button>
+      `).join('');
+
+      const actContainer = document.getElementById('builder-actions');
+      actContainer.innerHTML = BUILDER_ACTIONS.map((a, i) => `
+        <button onclick="selectBuilderAction(${i})" id="act-btn-${i}"
+          class="px-3 py-2 rounded-xl font-bold text-sm border-2 transition cursor-pointer ${i === 0 ? 'bg-pink-500 text-white border-pink-600 shadow' : 'bg-pink-50 text-pink-800 border-pink-200 hover:bg-pink-100'}">
+          ${a.emoji} ${a.label}
+        </button>
+      `).join('');
+    }
+
+    function playVocabCard(id) {
+      const item = VOCABULARY.find(v => v.id === id);
+      if (!item) return;
+      playTone('pop');
+      speakText(`${item.word}. ${item.sentence}`);
+      showToast(`${item.emoji} ${item.word.toUpperCase()}`, `"${item.sentence}"`, '🔊');
+    }
+
+    function selectBuilderSubject(index) {
+      state.selectedSubject = BUILDER_SUBJECTS[index];
+      BUILDER_SUBJECTS.forEach((_, i) => {
+        const btn = document.getElementById(`subj-btn-${i}`);
+        btn.className = i === index
+          ? 'px-3.5 py-2 rounded-xl font-display font-bold text-base border-2 transition cursor-pointer bg-sky-500 text-white border-sky-600 shadow'
+          : 'px-3.5 py-2 rounded-xl font-display font-bold text-base border-2 transition cursor-pointer bg-sky-50 text-sky-800 border-sky-200 hover:bg-sky-100';
+      });
+      updateBuilderOutput();
+      speakBuilderSentence();
+    }
+
+    function selectBuilderAction(index) {
+      state.selectedAction = BUILDER_ACTIONS[index];
+      BUILDER_ACTIONS.forEach((_, i) => {
+        const btn = document.getElementById(`act-btn-${i}`);
+        btn.className = i === index
+          ? 'px-3 py-2 rounded-xl font-bold text-sm border-2 transition cursor-pointer bg-pink-500 text-white border-pink-600 shadow'
+          : 'px-3 py-2 rounded-xl font-bold text-sm border-2 transition cursor-pointer bg-pink-50 text-pink-800 border-pink-200 hover:bg-pink-100';
+      });
+      updateBuilderOutput();
+      speakBuilderSentence();
+    }
+
+    function updateBuilderOutput() {
+      const s = state.selectedSubject;
+      const a = state.selectedAction;
+      document.getElementById('builder-emoji').textContent = a.emoji;
+      document.getElementById('builder-output').innerHTML = `
+        <span class="text-sky-600">${s.label}</span> 
+        <span class="text-purple-600">${s.helper}</span> 
+        <span class="text-pink-600">${a.label}</span>.
+      `;
+    }
+
+    function speakBuilderSentence() {
+      const text = `${state.selectedSubject.label} ${state.selectedSubject.helper} ${state.selectedAction.label}.`;
+      speakText(text);
+    }
+
+    // ==========================================
+    // 7. SECTION 2: PRACTICE ACTIVITIES
+    // ==========================================
+    function renderPractice() {
+      renderPractice1();
+      renderPractice2();
+      renderPractice3();
+      updatePracticeProgress();
+    }
+
+    function renderPractice1() {
+      const grid = document.getElementById('practice-1-grid');
+      grid.innerHTML = PRACTICE_1_ITEMS.map((item, idx) => `
+        <div class="rounded-2xl p-4 border-2 ${item.solved ? 'bg-emerald-50 border-emerald-300' : 'bg-sky-50/60 border-sky-200'} flex flex-col justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <span class="text-4xl bg-white p-2.5 rounded-2xl shadow-sm">${item.emoji}</span>
+            <div>
+              <span class="text-xs font-extrabold uppercase text-sky-600">Clue ${idx + 1}</span>
+              <p class="font-bold text-slate-800 text-base">${item.clue}</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            ${item.options.map(opt => {
+              const isCorrectSolved = item.solved && opt === item.correct;
+              return `
+                <button onclick="checkPractice1(${idx}, '${opt}')" ${item.solved ? 'disabled' : ''}
+                  class="flex-1 py-2 px-3 rounded-xl font-display font-bold text-base border-2 transition cursor-pointer ${
+                    isCorrectSolved
+                      ? 'bg-emerald-500 text-white border-emerald-600'
+                      : item.solved
+                        ? 'bg-white/60 text-slate-400 border-slate-200'
+                        : 'bg-white hover:bg-pink-50 text-slate-800 border-pink-200 hover:border-pink-400'
+                  }">
+                  ${opt} ${isCorrectSolved ? '✅' : ''}
+                </button>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function checkPractice1(idx, choice) {
+      const item = PRACTICE_1_ITEMS[idx];
+      if (item.solved) return;
+
+      if (choice === item.correct) {
+        item.solved = true;
+        playTone('correct');
+        speakText(`Yes! ${item.correct}!`);
+        awardStars(1, 'Spot On!', `"${choice}" matches the picture!`, '🌟');
+        renderPractice1();
+        updatePracticeProgress();
+      } else {
+        playTone('tryAgain');
+        speakText('Try again! Look closely at the picture.');
+        showToast('Oops, Try Again!', `Look at ${item.emoji} — "${item.clue}"`, '💡');
+      }
+    }
+
+    function renderPractice2() {
+      const list = document.getElementById('practice-2-list');
+      list.innerHTML = PRACTICE_2_ITEMS.map((item, idx) => `
+        <div class="rounded-2xl p-4 border-2 ${item.solved ? 'bg-emerald-50 border-emerald-300' : 'bg-pink-50/50 border-pink-200'} flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">${item.emoji}</span>
+            <p class="text-lg font-bold text-slate-800">
+              <span class="text-sky-700">${item.before}</span> 
+              <span class="inline-block min-w-[3.5rem] text-center px-2 py-0.5 rounded-lg border-b-2 ${item.solved ? 'bg-emerald-200 text-emerald-900 border-emerald-500' : 'bg-white text-pink-600 border-pink-400'}">
+                ${item.solved ? item.correct : '___'}
+              </span> 
+              ${item.after}
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            ${['am', 'is', 'are'].map(opt => `
+              <button onclick="checkPractice2(${idx}, '${opt}')" ${item.solved ? 'disabled' : ''}
+                class="px-4 py-2 rounded-xl font-display font-bold text-base border-2 transition cursor-pointer ${
+                  item.solved && opt === item.correct
+                    ? 'bg-emerald-500 text-white border-emerald-600'
+                    : item.solved
+                      ? 'bg-white/60 text-slate-400 border-slate-200'
+                      : 'bg-white hover:bg-sky-100 text-sky-800 border-sky-300'
+                }">
+                ${opt}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function checkPractice2(idx, choice) {
+      const item = PRACTICE_2_ITEMS[idx];
+      if (item.solved) return;
+
+      if (choice === item.correct) {
+        item.solved = true;
+        playTone('correct');
+        const fullSentence = `${item.before} ${item.correct} ${item.after}`;
+        speakText(fullSentence);
+        awardStars(1, 'Great Grammar!', fullSentence, '⭐');
+        renderPractice2();
+        updatePracticeProgress();
+      } else {
+        playTone('tryAgain');
+        showToast('Almost!', item.hint, '🤔');
+      }
+    }
+
+    function renderPractice3() {
+      const container = document.getElementById('practice-3-container');
+      const badge = document.getElementById('p3-badge');
+
+      if (state.p3Completed) {
+        badge.textContent = '3 / 3 Solved ✅';
+        badge.className = 'px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold text-sm';
+        container.innerHTML = `
+          <div class="text-center py-4 space-y-2">
+            <div class="text-4xl">🎉🏆</div>
+            <h4 class="font-display font-bold text-xl text-emerald-700">You Unscrambled All 3 Sentences!</h4>
+            <p class="text-slate-600 font-bold">Amazing sentence building skills!</p>
+          </div>
+        `;
+        return;
+      }
+
+      const current = PRACTICE_3_SENTENCES[state.p3Index];
+      badge.textContent = `Question ${state.p3Index + 1} of ${PRACTICE_3_SENTENCES.length}`;
+
+      // Create shuffled words deterministically
+      const shuffled = [...current.words].sort((a, b) => a.length - b.length || a.localeCompare(b));
+
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="text-4xl bg-white p-2.5 rounded-2xl shadow-sm">${current.emoji}</span>
+            <p class="font-bold text-slate-700">Tap the words below to build the sentence:</p>
+          </div>
+
+          <!-- Selected Sentence Strip -->
+          <div class="min-h-[3.5rem] bg-white rounded-2xl p-3 border-2 border-dashed border-sky-400 flex flex-wrap items-center gap-2">
+            ${state.p3SelectedWords.length === 0
+              ? '<span class="text-slate-400 font-bold text-sm">Tap word tiles below...</span>'
+              : state.p3SelectedWords.map((w, i) => `
+                  <button onclick="removeP3Word(${i})" class="px-3.5 py-1.5 rounded-xl bg-sky-500 text-white font-display font-bold text-base shadow cursor-pointer">
+                    ${w}
+                  </button>
+                `).join('')
+            }
+          </div>
+
+          <!-- Available Word Tiles -->
+          <div class="flex flex-wrap gap-2.5">
+            ${shuffled.map(word => {
+              const used = state.p3SelectedWords.includes(word);
+              return `
+                <button onclick="addP3Word('${word}')" ${used ? 'disabled' : ''}
+                  class="px-4 py-2.5 rounded-xl font-display font-bold text-base border-2 transition cursor-pointer ${
+                    used
+                      ? 'bg-slate-100 text-slate-300 border-slate-200'
+                      : 'bg-white hover:bg-pink-100 text-pink-700 border-pink-300 shadow-sm'
+                  }">
+                  ${word}
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <div class="flex items-center gap-3 pt-1">
+            <button onclick="checkPractice3()" class="btn-candy-pink text-white font-display font-bold px-5 py-2.5 rounded-xl cursor-pointer">
+              ✅ Check Sentence
+            </button>
+            <button onclick="clearPractice3()" class="px-4 py-2.5 rounded-xl bg-white border-2 border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 cursor-pointer">
+              Clear
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function addP3Word(word) {
+      if (!state.p3SelectedWords.includes(word)) {
+        state.p3SelectedWords.push(word);
+        playTone('pop');
+        renderPractice3();
+      }
+    }
+
+    function removeP3Word(idx) {
+      state.p3SelectedWords.splice(idx, 1);
+      playTone('pop');
+      renderPractice3();
+    }
+
+    function clearPractice3() {
+      state.p3SelectedWords = [];
+      renderPractice3();
+    }
+
+    function checkPractice3() {
+      const current = PRACTICE_3_SENTENCES[state.p3Index];
+      const built = state.p3SelectedWords.join(' ');
+      if (built === current.full) {
+        playTone('correct');
+        speakText(current.full);
+        awardStars(2, 'Super Sentence!', `"${current.full}"`, '🌟');
+        state.p3SelectedWords = [];
+        if (state.p3Index + 1 < PRACTICE_3_SENTENCES.length) {
+          state.p3Index++;
+        } else {
+          state.p3Completed = true;
+        }
+        renderPractice3();
+        updatePracticeProgress();
+      } else {
+        playTone('tryAgain');
+        showToast('Not Quite Yet!', 'Start with the person (I, She, or They), then am/is/are!', '💡');
+      }
+    }
+
+    function updatePracticeProgress() {
+      const p1Count = PRACTICE_1_ITEMS.filter(i => i.solved).length;
+      const p2Count = PRACTICE_2_ITEMS.filter(i => i.solved).length;
+
+      const b1 = document.getElementById('p1-badge');
+      b1.textContent = `${p1Count} / 4 Solved ${p1Count === 4 ? '✅' : ''}`;
+      if (p1Count === 4) b1.className = 'px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold text-sm';
+
+      const b2 = document.getElementById('p2-badge');
+      b2.textContent = `${p2Count} / 4 Solved ${p2Count === 4 ? '✅' : ''}`;
+      if (p2Count === 4) b2.className = 'px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold text-sm';
+
+      let completedActivities = 0;
+      if (p1Count === 4) completedActivities++;
+      if (p2Count === 4) completedActivities++;
+      if (state.p3Completed) completedActivities++;
+
+      document.getElementById('practice-progress-text').textContent = `${completedActivities} / 3 Completed`;
+    }
+
+    // ==========================================
+    // 8. SECTION 3: ASSESSMENT QUIZ
+    // ==========================================
+    function renderQuiz() {
+      const q = QUIZ_QUESTIONS[state.quizIndex];
+      const total = QUIZ_QUESTIONS.length;
+      document.getElementById('quiz-step-label').textContent = `Question ${state.quizIndex + 1} / ${total}`;
+      document.getElementById('quiz-progress-bar').style.width = `${((state.quizIndex + 1) / total) * 100}%`;
+
+      const box = document.getElementById('quiz-question-box');
+      box.innerHTML = `
+        <div class="bg-gradient-to-r from-sky-50 to-pink-50 rounded-3xl p-6 border-2 border-pink-200 text-center space-y-3">
+          <div class="text-6xl">${q.emoji}</div>
+          <h3 class="text-xl sm:text-2xl font-display font-bold text-slate-800">
+            ${q.question}
+          </h3>
+          <button onclick="speakText('${q.speak.replace(/'/g, "\\'")}')" 
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm shadow cursor-pointer">
+            <span>🔊</span> Listen to Question
+          </button>
+        </div>
+
+        <div id="quiz-options" class="grid grid-cols-1 gap-3">
+          ${q.options.map((opt, idx) => `
+            <button onclick="answerQuiz(${idx})" id="q-opt-${idx}"
+              class="w-full text-left p-4 rounded-2xl bg-white hover:bg-sky-50 border-3 border-2 border-sky-200 hover:border-pink-400 font-display font-bold text-lg text-slate-800 flex items-center justify-between transition cursor-pointer">
+              <span>${String.fromCharCode(65 + idx)}. ${opt}</span>
+              <span class="text-xl opacity-40">👉</span>
+            </button>
+          `).join('')}
+        </div>
+
+        <div id="quiz-feedback" class="hidden rounded-2xl p-4 font-bold text-center"></div>
+
+        <div id="quiz-next-wrap" class="hidden text-center pt-2">
+          <button onclick="nextQuizQuestion()" class="btn-candy-mix text-white font-display font-bold text-lg px-8 py-3 rounded-2xl cursor-pointer">
+            ${state.quizIndex + 1 < total ? 'Next Question ➡️' : 'See My Certificate! 🏆'}
+          </button>
+        </div>
+      `;
+    }
+
+    function answerQuiz(selectedIndex) {
+      if (state.quizAnswered) return;
+      state.quizAnswered = true;
+
+      const q = QUIZ_QUESTIONS[state.quizIndex];
+      const isRight = selectedIndex === q.correct;
+
+      q.options.forEach((_, idx) => {
+        const btn = document.getElementById(`q-opt-${idx}`);
+        btn.disabled = true;
+        if (idx === q.correct) {
+          btn.className = 'w-full text-left p-4 rounded-2xl bg-emerald-100 border-2 border-emerald-500 font-display font-bold text-lg text-emerald-900 flex items-center justify-between';
+          btn.lastElementChild.textContent = '✅';
+          btn.lastElementChild.classList.remove('opacity-40');
+        } else if (idx === selectedIndex && !isRight) {
+          btn.className = 'w-full text-left p-4 rounded-2xl bg-rose-100 border-2 border-rose-400 font-display font-bold text-lg text-rose-900 flex items-center justify-between';
+          btn.lastElementChild.textContent = '❌';
+          btn.lastElementChild.classList.remove('opacity-40');
+        }
+      });
+
+      const fb = document.getElementById('quiz-feedback');
+      fb.classList.remove('hidden');
+
+      if (isRight) {
+        state.quizScore++;
+        playTone('correct');
+        speakText('Wonderful! That is correct!');
+        awardStars(2, 'Correct Answer!', '+2 Stars earned!', '⭐');
+        fb.className = 'rounded-2xl p-4 font-bold text-center bg-emerald-50 text-emerald-800 border-2 border-emerald-300';
+        fb.textContent = '🎉 Wonderful! You got it right!';
+      } else {
+        playTone('tryAgain');
+        speakText(`Good try! The right answer is ${q.options[q.correct]}`);
+        fb.className = 'rounded-2xl p-4 font-bold text-center bg-amber-50 text-amber-900 border-2 border-amber-300';
+        fb.textContent = `💡 Good try! The correct answer is: "${q.options[q.correct]}"`;
+      }
+
+      document.getElementById('quiz-next-wrap').classList.remove('hidden');
+    }
+
+    function nextQuizQuestion() {
+      state.quizAnswered = false;
+      if (state.quizIndex + 1 < QUIZ_QUESTIONS.length) {
+        state.quizIndex++;
+        renderQuiz();
+      } else {
+        showQuizResults();
+      }
+    }
+
+    function showQuizResults() {
+      document.getElementById('quiz-active-view').classList.add('hidden');
+      document.getElementById('quiz-result-view').classList.remove('hidden');
+      const total = QUIZ_QUESTIONS.length;
+      document.getElementById('quiz-score-summary').textContent = `You scored ${state.quizScore} out of ${total}!`;
+      document.getElementById('cert-score-badge').textContent = `Score: ${state.quizScore}/${total}`;
+      playTone('correct');
+      speakText(`Congratulations! You finished the quiz and scored ${state.quizScore} out of ${total}!`);
+    }
+
+    function resetQuiz() {
+      state.quizIndex = 0;
+      state.quizScore = 0;
+      state.quizAnswered = false;
+      document.getElementById('quiz-result-view').classList.add('hidden');
+      document.getElementById('quiz-active-view').classList.remove('hidden');
+      renderQuiz();
+    }
+
+    // ==========================================
+    // 9. SECTION 4: MINI GAME (ACTION POP)
+    // ==========================================
+    function startGame(seconds) {
+      state.gameScore = 0;
+      state.gameTimeLeft = seconds;
+      state.gameStreak = 0;
+
+      document.getElementById('game-score').textContent = '0';
+      document.getElementById('game-timer').textContent = `${seconds}s`;
+      document.getElementById('game-streak-badge').textContent = '🔥 Streak: 0';
+
+      document.getElementById('game-start-screen').classList.add('hidden');
+      document.getElementById('game-over-screen').classList.add('hidden');
+      document.getElementById('game-play-screen').classList.remove('hidden');
+
+      nextGameRound();
+
+      clearInterval(state.gameInterval);
+      state.gameInterval = setInterval(() => {
+        state.gameTimeLeft--;
+        document.getElementById('game-timer').textContent = `${state.gameTimeLeft}s`;
+        if (state.gameTimeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function nextGameRound() {
+      // Pick 6 random items from VOCABULARY
+      const shuffled = [...VOCABULARY].sort(() => Math.random() - 0.5).slice(0, 6);
+      const target = shuffled[Math.floor(Math.random() * shuffled.length)];
+      state.gameTarget = target;
+
+      document.getElementById('game-target-prompt').textContent = `"${target.sentence}"`;
+      speakText(target.sentence);
+
+      const grid = document.getElementById('game-cards-grid');
+      grid.innerHTML = shuffled.map((item, idx) => {
+        const bg = idx % 2 === 0
+          ? 'bg-sky-50 hover:bg-sky-100 border-sky-300'
+          : 'bg-pink-50 hover:bg-pink-100 border-pink-300';
+        return `
+          <button onclick="handleGameCardTap('${item.id}')"
+            class="rounded-3xl p-4 sm:p-5 border-3 border-2 ${bg} shadow-sm hover:scale-105 active:scale-95 transition-all flex flex-col items-center justify-center gap-2 cursor-pointer">
+            <span class="text-5xl sm:text-6xl">${item.emoji}</span>
+            <span class="font-display font-bold text-lg text-slate-800 capitalize">${item.word}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function repeatGamePrompt() {
+      if (state.gameTarget) {
+        speakText(state.gameTarget.sentence);
+      }
+    }
+
+    function handleGameCardTap(tappedId) {
+      if (!state.gameTarget) return;
+      if (tappedId === state.gameTarget.id) {
+        state.gameStreak++;
+        const bonus = state.gameStreak >= 3 ? 5 : 0;
+        state.gameScore += 10 + bonus;
+        document.getElementById('game-score').textContent = state.gameScore;
+        document.getElementById('game-streak-badge').textContent = `🔥 Streak: ${state.gameStreak}${bonus ? ' (+5 Bonus!)' : ''}`;
+        playTone('correct');
+        nextGameRound();
+      } else {
+        state.gameStreak = 0;
+        document.getElementById('game-streak-badge').textContent = '🔥 Streak: 0';
+        playTone('tryAgain');
+        showToast('Oops!', `Look for "${state.gameTarget.word}"!`, '🎯');
+      }
+    }
+
+    function endGame() {
+      clearInterval(state.gameInterval);
+      state.gameInterval = null;
+      document.getElementById('game-play-screen').classList.add('hidden');
+      document.getElementById('game-over-screen').classList.remove('hidden');
+
+      const earnedStars = Math.max(1, Math.floor(state.gameScore / 20));
+      document.getElementById('game-final-summary').textContent = `Final Score: ${state.gameScore} Points!`;
+      awardStars(earnedStars, 'Game Complete!', `You won ${earnedStars} star(s) from Action Pop!`, '🎮');
+    }
+
+    // ==========================================
+    // 10. SECTION 5: REFLECTION
+    // ==========================================
+    function selectMood(mood) {
+      state.selectedMood = mood;
+      playTone('pop');
+      ['super', 'good', 'practice'].forEach(m => {
+        const btn = document.getElementById(`mood-${m}`);
+        btn.className = m === mood
+          ? 'mood-btn p-4 rounded-2xl bg-pink-100 border-4 border-pink-500 text-center shadow-md scale-105 transition cursor-pointer'
+          : 'mood-btn p-4 rounded-2xl bg-white border-2 border-sky-200 hover:border-pink-400 text-center transition cursor-pointer';
+      });
+    }
+
+    function submitReflection() {
+      playTone('correct');
+      const sentence = document.getElementById('reflection-sentence').value.trim();
+      const noteEl = document.getElementById('reflection-teacher-note');
+
+      let customNote = 'You did an awesome job learning "What Are You Doing?" today! ';
+      if (sentence) {
+        customNote += `I love your sentence: "${sentence}"! `;
+      }
+      if (state.selectedMood === 'practice') {
+        customNote += 'Remember: you can visit the Materials tab anytime to listen and practice again!';
+      } else {
+        customNote += 'Keep shining bright in English class!';
+      }
+
+      noteEl.textContent = customNote;
+      document.getElementById('reflection-complete-card').classList.remove('hidden');
+
+      if (!state.reflectionSubmitted) {
+        state.reflectionSubmitted = true;
+        awardStars(3, 'Lesson Completed!', 'You earned +3 Reflection Stars!', '🏆');
+      }
+      speakText('Great job reflecting on your learning today! You earned a teacher sticker!');
+    }
+
+    // ==========================================
+    // 11. INITIALIZE APP ON LOAD
+    // ==========================================
+    window.addEventListener('DOMContentLoaded', () => {
+      switchTab('materials');
+      renderMaterials();
+      renderPractice();
+      renderQuiz();
+    });
+  </script>
+</body>
+</html>
